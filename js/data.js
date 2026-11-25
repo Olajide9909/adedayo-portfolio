@@ -2,6 +2,8 @@
 const yt = id => ({ type: 'video', id });
 const img = (src, cap) => ({ type: 'image', src, cap });
 const link = (href, label) => ({ type: 'link', href, label });
+const mp4 = (src, poster) => ({ type: 'mp4', src, poster });
+const pdf = (src, thumb, cap) => ({ type: 'pdf', src, thumb, cap });
 
 window.PORTFOLIO = {
   roles: ['Video Editor', 'Cinematographer', 'Social Media Manager', 'Photographer', 'Journalist', 'Drone Operator'],
@@ -25,7 +27,8 @@ window.PORTFOLIO = {
     {
       key: 'drone', title: 'Drone & Aerial', tag: 'Aerial videography', color: '#7c5cff',
       desc: 'Aerial footage that gives events, properties and places a sense of scale.',
-      items: [link('https://drive.google.com/drive/folders/1vp2FwVPEhnl_nK9_ASGQ9A-51hiz-RP_', 'Open drone footage on Drive')]
+      items: [mp4('assets/video/drone-0956.mp4', 'assets/img/drone/0954.jpg'), mp4('assets/video/drone-0962.mp4', 'assets/img/drone/0960.jpg')]
+        .concat(['0427', '0954', '0955', '0957', '0960', '0965', '0967', '0980', '0981', '0989'].map(n => img(`assets/img/drone/${n}.jpg`, 'Aerial photo')))
     },
     {
       key: 'social', title: 'Social Media', tag: 'Cheser Media', color: '#3dffa8',
@@ -36,6 +39,12 @@ window.PORTFOLIO = {
       key: 'editorial', title: 'Journalism & Editorial', tag: 'Writing & publishing', color: '#ff3d8b',
       desc: 'Newsroom reporting at The Nation, consulting at KSMedia, WordPress publishing, and leading two publications as Editor-in-Chief, from pitch through publication.',
       items: [link('#', 'Add article links here')]
+    },
+    {
+      key: 'certs', title: 'Certificates', tag: 'Credentials', color: '#c8ff3d',
+      desc: 'Professional development certificates.',
+      items: [['critical-thinking', 'Critical Thinking & Problem Solving'], ['business-writing', 'Effective Communication & Business Writing'], ['everyday-ai', 'Everyday AI'], ['personal-effectiveness', 'Personal Effectiveness']]
+        .map(([f, c]) => pdf(`assets/certs/${f}.pdf`, `assets/img/certs/${f}.jpg`, c))
     }
   ],
   experience: [

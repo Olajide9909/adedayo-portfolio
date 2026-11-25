@@ -49,9 +49,21 @@ addEventListener('pointermove', e => { mouse.x = e.clientX / innerWidth - 0.5; m
 function resize() {
   renderer.setSize(innerWidth, innerHeight, false);
   camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
-  lens.position.x = innerWidth > 900 ? 3.2 : 0;
-  lens.scale.setScalar(innerWidth > 900 ? 1 : 0.7);
+  placeLens();
 }
+// Centre the lens behind the hero photo
+const anchor = new THREE.Vector3();
+function placeLens() {
+  const el = document.getElementById('hero-visual'); if (!el) return;
+  const r = el.getBoundingClientRect();
+  const cx = (r.left + r.width / 2) / innerWidth * 2 - 1, cy = -((r.top + scrollY + r.height / 2) / innerHeight * 2 - 1);
+  anchor.set(cx, cy, 0.5).unproject(camera).sub(camera.position).normalize();
+  const d = -camera.position.z / anchor.z; anchor.multiplyScalar(d).add(camera.position);
+  const h = 2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)) * camera.position.z;
+  lens.userData.base = { x: anchor.x, y: anchor.y };
+  lens.scale.setScalar((el.offsetWidth / innerHeight) * h / 4.6);
+}
+addEventListener('load', placeLens);
 addEventListener('resize', resize); resize();
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -62,13 +74,13 @@ function tick() {
   lens.rotation.y = t * 0.25 + mouse.x * 0.8;
   lens.rotation.x = mouse.y * 0.6 + sp * 0.6;
   lens.children.forEach((c, i) => { c.rotation.z = t * (0.2 + i * 0.1) * (i % 2 ? -1 : 1); });
-  lens.position.y = -sp * 3;
+  const b = lens.userData.base || { x: 0, y: 0 };
+  lens.position.x = b.x; lens.position.y = b.y - sp * 3;
   frames.children.forEach(f => { f.rotation.x += 0.002 * f.userData.s * 5; f.rotation.y += 0.003 * f.userData.s * 5; });
   frames.position.y = sp * 2.2;
   dust.rotation.y = t * 0.02;
-  camera.position.x += (mouse.x * 1.2 - camera.position.x) * 0.05;
-  camera.position.y += (-mouse.y * 0.8 - camera.position.y) * 0.05;
-  camera.lookAt(0, 0, 0);
+  camera.rotation.y += (-mouse.x * 0.08 - camera.rotation.y) * 0.05;
+  camera.rotation.x += (-mouse.y * 0.05 - camera.rotation.x) * 0.05;
   renderer.render(scene, camera);
   if (!reduce) requestAnimationFrame(tick);
 }

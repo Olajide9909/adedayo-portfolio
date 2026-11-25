@@ -17,7 +17,7 @@
     const el = document.createElement('button');
     el.className = 'folder reveal'; el.style.setProperty('--c', f.color);
     const thumbs = f.items.filter(x => x.type !== 'link').slice(0, 3).map(x =>
-      `<span style="background-image:url('${x.type === 'video' ? `https://i.ytimg.com/vi/${x.id}/mqdefault.jpg` : x.src}')"></span>`).join('');
+      `<span style="background-image:url('${x.type === 'video' ? `https://i.ytimg.com/vi/${x.id}/mqdefault.jpg` : x.poster || x.thumb || x.src}')"></span>`).join('');
     el.innerHTML = `<div class="f-back"></div><div class="f-papers">${thumbs || '<span></span><span></span>'}</div>
       <div class="f-front"><small>${String(i + 1).padStart(2, '0')} · ${f.tag}</small><strong>${f.title}</strong><em>${f.items.length} item${f.items.length > 1 ? 's' : ''} →</em></div>`;
     el.addEventListener('click', () => openFolder(f));
@@ -31,6 +31,8 @@
     modal.style.setProperty('--c', f.color);
     body.innerHTML = f.items.map(x => x.type === 'video'
       ? `<div class="g-item vid" data-id="${x.id}"><img loading="lazy" src="https://i.ytimg.com/vi/${x.id}/hqdefault.jpg" alt="Video thumbnail"><span class="play">▶</span></div>`
+      : x.type === 'mp4' ? `<div class="g-item wide"><video src="${x.src}" poster="${x.poster}" controls preload="none" playsinline></video></div>`
+      : x.type === 'pdf' ? `<a class="g-item cert" href="${x.src}" target="_blank" rel="noopener"><img loading="lazy" src="${x.thumb}" alt="${x.cap}"><span>${x.cap}</span></a>`
       : x.type === 'image' ? `<a class="g-item" href="${x.src}" target="_blank" rel="noopener"><img loading="lazy" src="${x.src}" alt="${x.cap}"></a>`
       : `<a class="g-item linkcard" href="${x.href}" target="_blank" rel="noopener">${x.label} ↗</a>`).join('');
     body.querySelectorAll('.vid').forEach(v => v.addEventListener('click', () => {
@@ -41,7 +43,8 @@
     anime({ targets: '.g-item', opacity: [0, 1], scale: [0.85, 1], delay: anime.stagger(50, { start: 200 }), easing: 'easeOutBack' });
     $('#close').focus();
   }
-  function close() { modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); body.innerHTML = ''; document.body.style.overflow = ''; }
+  document.querySelectorAll('[data-open]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); openFolder(D.folders.find(f => f.key === a.dataset.open)); }));
+  function close() { body.querySelectorAll('video').forEach(v => v.pause()); modal.classList.remove('open'); modal.setAttribute('aria-hidden', 'true'); body.innerHTML = ''; document.body.style.overflow = ''; }
   $('#close').onclick = close; modal.onclick = e => { if (e.target === modal) close(); };
   addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 
@@ -80,7 +83,14 @@
     .add({ targets: '#loader span', scale: [0.6, 1], opacity: [0, 1], duration: 600 })
     .add({ targets: '#loader', opacity: 0, duration: 500, complete: () => $('#loader').remove() })
     .add({ targets: '.hero-title .line', translateY: ['110%', 0], opacity: [0, 1], delay: anime.stagger(120), duration: 1100 }, '-=200')
-    .add({ targets: '.hero .eyebrow, .hero-roles, .hero-cta, .nav', opacity: [0, 1], translateY: [20, 0], delay: anime.stagger(80), duration: 800 }, '-=800');
+    .add({ targets: '.hero-text > *:not(.hero-title), .nav', opacity: [0, 1], translateY: [20, 0], delay: anime.stagger(70), duration: 800 }, '-=800')
+    .add({ targets: '.hero-visual', opacity: [0, 1], scale: [0.7, 1], rotate: [-8, 0], duration: 1400 }, '-=1200')
+    ;
+
+  // Active link in nav
+  const links = [...document.querySelectorAll('#navlinks a')];
+  const spy = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + e.target.id)); }), { rootMargin: '-45% 0px -50% 0px' });
+  ['about', 'work', 'experience', 'contact'].forEach(id => spy.observe(document.getElementById(id)));
 
   // Scroll reveal + counters
   const io = new IntersectionObserver(es => es.forEach(e => {
