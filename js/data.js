@@ -17,11 +17,12 @@ window.PORTFOLIO = {
     },
     {
       key: 'photo', title: 'Photography', tag: 'Portraits & events', color: '#ffc23d',
-      desc: 'Portrait, graduation and event photography shot on a Canon EOS RP, including the Yaba College of Technology 37th Convocation: lighting, composition and retouching in Lightroom and Photoshop.',
+      desc: 'Portrait, graduation and event photography shot on a Canon EOS RP, including the Yaba College of Technology 37th Convocation, church vigils and the Higher Calling Conference 2026: lighting, composition and retouching in Lightroom and Photoshop.',
       items: [1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => img(`assets/img/events/e${n}.jpg`, 'Yaba College of Technology 37th Convocation'))
         .concat([1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => img(`assets/img/p${n}.jpg`, 'Portrait shoot')))
-        .concat([['aQkFxUmHFzJLqz1o7', 'Event album 1'], ['zimw6GcKXJ1tZ2kj9', 'Event album 2'], ['zqXRvGaGakkVpzvW7', 'Event album 3'], ['2JZkvmnZ8oDsdY5E7', 'Event album 4']]
-          .map(([id, l]) => link(`https://photos.app.goo.gl/${id}`, `${l} (Google Photos)`)))
+        .concat([['aQkFxUmHFzJLqz1o7', 'Lagos Province Youth Fellowship: August Overcomer’s Vigil'], ['zimw6GcKXJ1tZ2kj9', 'Throne of Christ'], ['zqXRvGaGakkVpzvW7', 'Lagos Province Youth Fellowship: Monthly Vigil'], ['2JZkvmnZ8oDsdY5E7', 'Higher Calling Conference 2026 (Awakened Unto The Harvest)']]
+          .flatMap(([id, ev], a) => [1, 2, 3, 4, 5, 6].map(k => img(`assets/img/albums/a${a + 1}_${k}.jpg`, ev))
+            .concat([link(`https://photos.app.goo.gl/${id}`, `Full album: ${ev}`)])))
         .concat([link(FULL, 'More photography on Drive')])
     },
     {

@@ -33,7 +33,7 @@
       ? `<div class="g-item vid" data-id="${x.id}"><img loading="lazy" src="https://i.ytimg.com/vi/${x.id}/hqdefault.jpg" alt="Video thumbnail"><span class="play">▶</span></div>`
       : x.type === 'mp4' ? `<div class="g-item wide"><video src="${x.src}" poster="${x.poster}" controls preload="none" playsinline></video></div>`
       : x.type === 'pdf' ? `<a class="g-item cert" href="${x.src}" target="_blank" rel="noopener"><img loading="lazy" src="${x.thumb}" alt="${x.cap}"><span>${x.cap}</span></a>`
-      : x.type === 'image' ? `<a class="g-item" href="${x.src}" target="_blank" rel="noopener"><img loading="lazy" src="${x.src}" alt="${x.cap}"></a>`
+      : x.type === 'image' ? `<a class="g-item" href="${x.src}" target="_blank" rel="noopener"><img loading="lazy" src="${x.src}" alt="${x.cap}"><span class="cap">${x.cap}</span></a>`
       : `<a class="g-item linkcard" href="${x.href}" target="_blank" rel="noopener">${x.label} ↗</a>`).join('');
     body.querySelectorAll('.vid').forEach(v => v.addEventListener('click', () => {
       v.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${v.dataset.id}?autoplay=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Video"></iframe>`;
