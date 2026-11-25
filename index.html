@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adedayo Adelumola | Video Editor & Content Creator</title>
+<meta name="description" content="Portfolio of Adedayo Solomon Adelumola: video editor, cinematographer, social media manager and journalist based in Lagos, Nigeria.">
+<meta property="og:title" content="Adedayo Adelumola | Portfolio">
+<meta property="og:description" content="Video editing, cinematography, photography, social media and editorial work.">
+<meta property="og:image" content="assets/img/p8.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="loader" id="loader"><span>AA</span></div>
+
+<header class="nav">
+  <a href="#home" class="logo">AA<span>.</span></a>
+  <nav>
+    <a href="#about">About</a><a href="#work">Work</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section id="home" class="hero">
+    <p class="eyebrow">Lagos, Nigeria · Available for work</p>
+    <h1 class="hero-title"><span class="line">Adedayo</span><span class="line accent">Adelumola</span></h1>
+    <p class="hero-roles"><span id="role">Video Editor</span><i class="caret"></i></p>
+    <div class="hero-cta">
+      <a href="#work" class="btn primary">Open the folders</a>
+      <a href="#contact" class="btn">Get in touch</a>
+    </div>
+    <div class="scroll-hint">scroll</div>
+  </section>
+
+  <section id="about" class="about reveal">
+    <div class="portrait-wrap tilt">
+      <div class="portrait-frame"><img id="portrait" src="assets/img/p8.jpg" alt="Portrait of Adedayo Adelumola"></div>
+      <div class="badge">HND · Journalism &amp; Media Studies</div>
+    </div>
+    <div class="about-text">
+      <p class="eyebrow">Professional summary</p>
+      <h2>I turn raw footage and ideas into stories people watch to the end.</h2>
+      <p>Video editor, cinematographer and digital content creator with an HND in Journalism and Media Studies from Yaba College of Technology. I work across camera operation, lighting, directing, sound capture and post-production, and I manage social media content from idea to publishing schedule to performance review.</p>
+      <p>Newsroom training at <b>The Nation</b> and editorial leadership as Editor-in-Chief give my work a reporter's discipline: accurate, well researched and delivered on deadline.</p>
+      <div class="stats">
+        <div><b data-count="654029">0</b><span>Facebook views in 30 days</span></div>
+        <div><b data-count="73000">0</b><span>Accounts reached</span></div>
+        <div><b data-count="9">0</b><span>Published video samples</span></div>
+      </div>
+      <p class="note">Cheser Media figures, October 2026, team-managed accounts.</p>
+    </div>
+  </section>
+
+  <section id="work" class="work">
+    <div class="section-head reveal">
+      <p class="eyebrow">Portfolio</p>
+      <h2>Skill folders</h2>
+      <p>Click a folder to open the work inside.</p>
+    </div>
+    <div class="folders" id="folders"></div>
+  </section>
+
+  <section id="experience" class="experience">
+    <div class="section-head reveal"><p class="eyebrow">Career</p><h2>Experience</h2></div>
+    <ol class="timeline" id="timeline"></ol>
+  </section>
+
+  <section class="skills reveal">
+    <div class="section-head"><p class="eyebrow">Toolkit</p><h2>Tools I work with</h2></div>
+    <div class="marquee"><div class="track" id="tools"></div></div>
+  </section>
+
+  <section class="edu reveal">
+    <div class="card"><p class="eyebrow">Education</p><h3>Higher National Diploma, Journalism &amp; Media Studies</h3><p>Yaba College of Technology, Lagos</p></div>
+    <div class="card"><p class="eyebrow">Leadership</p><h3>Editor-in-Chief &amp; Fellowship President</h3><p>Departmental Newspaper &amp; Magazine, Isolo Era Community Magazine, Liberal Studies Students Fellowship</p></div>
+    <div class="card"><p class="eyebrow">Credentials</p><h3>Certificates &amp; licences</h3><p><a href="https://drive.google.com/drive/folders/1jvQDwpMEbcaaCIa-icN8_TVABUVb4Ji1" target="_blank" rel="noopener">View on Google Drive →</a></p></div>
+  </section>
+
+  <section id="contact" class="contact reveal">
+    <p class="eyebrow">Contact</p>
+    <h2>Let's make something<br><span class="accent">worth watching.</span></h2>
+    <a class="mail" href="mailto:adelumolaadedayo@gmail.com">adelumolaadedayo@gmail.com</a>
+    <div class="links">
+      <a href="https://linktr.ee/CHESERMEDIA" target="_blank" rel="noopener">Cheser Media</a>
+      <a href="https://drive.google.com/drive/folders/1cqJaDqpICZEB0RbMD_n27lH1UDQGrKlP" target="_blank" rel="noopener">Full portfolio</a>
+      <a href="assets/Adedayo_Adelumola_CV.pdf" target="_blank" rel="noopener">Download CV</a>
+    </div>
+  </section>
+</main>
+<footer>© <span id="yr"></span> Adedayo Solomon Adelumola</footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-inner" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="close" id="close" aria-label="Close">×</button>
+    <p class="eyebrow" id="modal-tag"></p>
+    <h3 id="modal-title"></h3>
+    <p id="modal-desc"></p>
+    <div class="gallery" id="modal-body"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="js/data.js"></script>
+<script type="module" src="js/scene.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
