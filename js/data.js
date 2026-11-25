@@ -3,6 +3,7 @@ const yt = id => ({ type: 'video', id });
 const img = (src, cap) => ({ type: 'image', src, cap });
 const link = (href, label) => ({ type: 'link', href, label });
 const mp4 = (src, poster) => ({ type: 'mp4', src, poster });
+const FULL = 'https://drive.google.com/drive/folders/12E9JlCz8m80yeBs0bURcQcT0YUxmKN1c';
 const pdf = (src, thumb, cap) => ({ type: 'pdf', src, thumb, cap });
 
 window.PORTFOLIO = {
@@ -15,30 +16,39 @@ window.PORTFOLIO = {
         .concat([link('https://drive.google.com/drive/folders/1cqJaDqpICZEB0RbMD_n27lH1UDQGrKlP', 'Full editing portfolio on Drive')])
     },
     {
-      key: 'photo', title: 'Photography', tag: 'Portrait shoot', color: '#ffc23d',
-      desc: 'Studio portrait and graduation sessions shot on a Canon EOS RP: lighting, posing, composition and retouching in Lightroom and Photoshop.',
-      items: [1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => img(`assets/img/p${n}.jpg`, 'Portrait shoot'))
+      key: 'photo', title: 'Photography', tag: 'Portraits & events', color: '#ffc23d',
+      desc: 'Portrait, graduation and event photography shot on a Canon EOS RP, including the Yaba College of Technology 37th Convocation: lighting, composition and retouching in Lightroom and Photoshop.',
+      items: [1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => img(`assets/img/events/e${n}.jpg`, 'Yaba College of Technology 37th Convocation'))
+        .concat([1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => img(`assets/img/p${n}.jpg`, 'Portrait shoot')))
+        .concat([['aQkFxUmHFzJLqz1o7', 'Event album 1'], ['zimw6GcKXJ1tZ2kj9', 'Event album 2'], ['zqXRvGaGakkVpzvW7', 'Event album 3'], ['2JZkvmnZ8oDsdY5E7', 'Event album 4']]
+          .map(([id, l]) => link(`https://photos.app.goo.gl/${id}`, `${l} (Google Photos)`)))
+        .concat([link(FULL, 'More photography on Drive')])
     },
     {
       key: 'cine', title: 'Cinematography', tag: 'On set', color: '#3dd6ff',
       desc: 'Camera operation, lighting, directing and sound recording for corporate communication and brand storytelling at Royal Integrated Ventures (RIVNL).',
       items: ['nCe8nF3Jmb0', 'dj4_KH9GxxU', 'jL1pMxswFgo'].map(yt)
+        .concat([['v/19tYGpVogq', 'RIVNL brand video'], ['r/1JMEds8th9', 'RIVNL reel 1'], ['r/1HN3XM9d9a', 'RIVNL reel 2'], ['r/1ErKVbzjQh', 'RIVNL reel 3']]
+          .map(([id, l]) => link(`https://www.facebook.com/share/${id}/`, `${l} (Facebook)`)))
     },
     {
       key: 'drone', title: 'Drone & Aerial', tag: 'Aerial videography', color: '#7c5cff',
       desc: 'Aerial footage that gives events, properties and places a sense of scale.',
       items: [mp4('assets/video/drone-0956.mp4', 'assets/img/drone/0954.jpg'), mp4('assets/video/drone-0962.mp4', 'assets/img/drone/0960.jpg')]
         .concat(['0427', '0954', '0955', '0957', '0960', '0965', '0967', '0980', '0981', '0989'].map(n => img(`assets/img/drone/${n}.jpg`, 'Aerial photo')))
+        .concat([link(FULL, 'More aerial work on Drive')])
     },
     {
       key: 'social', title: 'Social Media', tag: 'Cheser Media', color: '#3dffa8',
       desc: 'Content ideas, publishing schedules, brand voice and insight-led planning. October 2026: 654,029 Facebook views, 73,000 accounts reached, 29,439 accounts engaged; 13,200 Instagram views. Insights shaped a 30/60/10 content mix for November.',
-      items: [link('https://linktr.ee/CHESERMEDIA', 'Cheser Media portfolio'), link('#', 'Event coverage: IMPACT 2026'), link('#', 'St. Cornelius Chapel Centenary publicity')]
+      items: [link('https://linktr.ee/CHESERMEDIA', 'Cheser Media portfolio'), link(FULL, 'Event coverage & publicity work on Drive')]
     },
     {
       key: 'editorial', title: 'Journalism & Editorial', tag: 'Writing & publishing', color: '#ff3d8b',
       desc: 'Newsroom reporting at The Nation, consulting at KSMedia, WordPress publishing, and leading two publications as Editor-in-Chief, from pitch through publication.',
-      items: [link('#', 'Add article links here')]
+      items: [img('assets/img/editorial/ed1.jpg', 'Editorial piece by Adelumola Adedayo Solomon'), img('assets/img/editorial/ed2.jpg', 'Editorial board')]
+        .concat([['rmd-faces-backlash-over-birthday-wish-to-omoni-oboli', 'RMD faces backlash over birthday wish to Omoni Oboli'], ['top-10-in-demand-tech-skills-to-stay-relevant-in-the-digital-age', 'Top 10 in-demand tech skills to stay relevant in the digital age'], ['regina-daniels-under-fire-over-congratulatory-post-to-priscilla-husband', 'Regina Daniels under fire over congratulatory post to Priscilla’s husband']]
+          .map(([slug, l]) => link(`https://thenationonlineng.net/${slug}/`, `The Nation: ${l}`)))
     },
     {
       key: 'certs', title: 'Certificates', tag: 'Credentials', color: '#c8ff3d',
