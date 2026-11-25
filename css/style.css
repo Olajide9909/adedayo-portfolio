@@ -202,3 +202,6 @@ footer{padding:20px 16px 28px}
 .g-item.cert img{height:auto}
 .g-item.cert span{display:block;padding:10px 12px;background:#101018;font-size:.85rem;font-weight:600}
 @media (max-width:640px){.g-item.wide{grid-column:1/-1}}
+
+/* Hide the host badge Netlify injects */
+#nl-badge-frame{display:none!important}
