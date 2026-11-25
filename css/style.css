@@ -207,3 +207,24 @@ footer{padding:20px 16px 28px}
 #nl-badge-frame{display:none!important}
 .phone{margin:14px 0 0;font:500 1.05rem "Space Grotesk";color:var(--mute)}.phone a{color:inherit;text-decoration:none;border-bottom:1px solid currentColor}
 .g-item{position:relative}.g-item .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 10px 8px;font-size:.72rem;line-height:1.3;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.8));pointer-events:none}
+/* Hero v3: cut-out portrait, halo, role chips on a curved line */
+.hero-visual{width:min(440px,86vw);aspect-ratio:4/5}
+.halo{position:absolute;left:50%;top:6%;width:62%;aspect-ratio:1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 40% 35%,#ffc23d,#ff6a3d 70%);box-shadow:0 0 90px 10px rgba(255,106,61,.35)}
+.cutout{position:absolute;left:50%;bottom:0;height:96%;transform:translateX(-50%);filter:grayscale(1) contrast(1.12) brightness(1.02);-webkit-mask-image:linear-gradient(#000 78%,transparent);mask-image:linear-gradient(#000 78%,transparent);pointer-events:none}
+.orbit{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.orbit path{fill:none;stroke:rgba(255,255,255,.55);stroke-width:1.6;stroke-dasharray:4 7;stroke-linecap:round}
+.chip{position:absolute;z-index:2;padding:8px 14px;border-radius:12px;background:rgba(10,10,16,.78);border:1px solid rgba(255,106,61,.75);backdrop-filter:blur(8px);font-size:.82rem;font-weight:500;white-space:nowrap;animation:float 5s ease-in-out infinite}
+.chip::after{content:"";position:absolute;left:-1px;bottom:-1px;width:12px;height:12px;background:var(--acc);clip-path:polygon(0 0,0 100%,100% 100%);border-bottom-left-radius:12px}
+.k1{top:14%;right:-6%}.k2{top:34%;left:-8%;animation-delay:-1s}.k3{top:55%;right:-12%;animation-delay:-2s}.k4{top:70%;left:-6%;animation-delay:-3s}.k5{bottom:8%;right:0;animation-delay:-4s}
+.hero-visual .rec{top:3%;left:4%;right:auto}
+.hero-title .accent{color:var(--acc)}
+/* About v3: vertical word, cut-out portrait, skill bars */
+.portrait-frame.cut{background:radial-gradient(circle at 50% 30%,#2a2a35,#0b0b11 70%);position:relative}
+.portrait-frame.cut img{object-fit:contain;object-position:50% 100%;filter:grayscale(1) contrast(1.1)}
+.vword{position:absolute;left:-14px;top:50%;transform:translate(-50%,-50%) rotate(-90deg);font:700 clamp(2.4rem,5vw,3.6rem) 'Space Grotesk';letter-spacing:.04em;color:transparent;-webkit-text-stroke:1.2px rgba(255,255,255,.35);white-space:nowrap;pointer-events:none;z-index:2}
+.vline{position:absolute;right:-26px;top:50%;transform:translate(50%,-50%) rotate(90deg);font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.skillbars{list-style:none;margin:18px 0 22px;display:grid;gap:8px;max-width:440px}
+.skillbars li{background:var(--c);color:#0b0b11;font:700 .95rem 'Space Grotesk';text-transform:uppercase;letter-spacing:.02em;padding:9px 18px;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.skillbars li:nth-child(2){margin-left:18px}.skillbars li:nth-child(3){margin-left:36px}.skillbars li:nth-child(4){margin-left:18px}
+@media (max-width:860px){.vword{left:6px;font-size:2rem}.vline{display:none}.skillbars li{margin-left:0!important}}
+@media (max-width:700px){.hero-visual{width:min(320px,78vw)}.chip{font-size:.7rem;padding:6px 10px}.k1{right:-4%}.k2{left:-4%}.k3{right:-6%}.k4{left:-4%}}

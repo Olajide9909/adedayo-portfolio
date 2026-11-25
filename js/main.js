@@ -110,4 +110,13 @@
     });
     el.addEventListener('pointerleave', () => anime({ targets: el, rotateX: 0, rotateY: 0, duration: 600, easing: 'easeOutElastic(1,.6)', complete: () => el.style.transform = '' }));
   });
+  // Skill bars slide in one after another
+  const sb = document.querySelector('.skillbars');
+  if (sb) { sb.querySelectorAll('li').forEach(l => l.style.opacity = 0);
+    new IntersectionObserver((es, o) => es.forEach(e => { if (!e.isIntersecting) return; o.disconnect();
+      anime({ targets: sb.querySelectorAll('li'), opacity: [0, 1], translateX: [-60, 0], delay: anime.stagger(110, { start: 250 }), duration: 900, easing: 'easeOutExpo' });
+    }), { threshold: 0.4 }).observe(sb); }
+
+  // Hero role chips pop in after the intro
+  anime({ targets: '.chip', opacity: [0, 1], scale: [0.6, 1], delay: anime.stagger(140, { start: 1600 }), duration: 700, easing: 'easeOutBack' });
 })();
