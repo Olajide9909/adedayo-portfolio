@@ -228,3 +228,14 @@ footer{padding:20px 16px 28px}
 .skillbars li:nth-child(2){margin-left:18px}.skillbars li:nth-child(3){margin-left:36px}.skillbars li:nth-child(4){margin-left:18px}
 @media (max-width:860px){.vword{left:6px;font-size:2rem}.vline{display:none}.skillbars li{margin-left:0!important}}
 @media (max-width:700px){.hero-visual{width:min(320px,78vw)}.chip{font-size:.7rem;padding:6px 10px}.k1{right:-4%}.k2{left:-4%}.k3{right:-6%}.k4{left:-4%}}
+/* External link cards */
+.gallery a.g-item.linkcard,.linkcard{aspect-ratio:auto;min-height:170px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:6px;text-align:left;padding:18px 18px 16px;border:1px solid color-mix(in srgb,var(--c) 45%,transparent);color:var(--fg);font:inherit;background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--c) 22%,transparent),transparent 60%),linear-gradient(160deg,#181822,#0e0e15);transition:transform .35s,border-color .35s,box-shadow .35s}
+.linkcard:hover{transform:translateY(-4px);border-color:var(--c);box-shadow:0 18px 40px -18px color-mix(in srgb,var(--c) 70%,transparent)}
+.lk-ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 16%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);margin-bottom:6px}
+.lk-ico svg{width:22px;height:22px;fill:none;stroke:var(--c);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.lk-src{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--c);font-weight:700}
+.linkcard strong{font:600 1rem/1.3 'Space Grotesk';color:var(--fg)}
+.lk-go{margin-top:auto;padding-top:10px;font-size:.8rem;font-weight:600;color:var(--mute);display:inline-flex;gap:6px;transition:color .3s}
+.lk-go i{font-style:normal;display:inline-block;transition:transform .3s}
+.linkcard:hover .lk-go{color:var(--c)}.linkcard:hover .lk-go i{transform:translate(3px,-3px)}
+.gallery a.g-item.linkcard{align-self:start}

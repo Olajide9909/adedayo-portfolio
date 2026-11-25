@@ -24,6 +24,27 @@
     fwrap.appendChild(el);
   });
 
+  // External link cards: icon + source + title, styled per link type
+  const ICON = {
+    album: '<path d="M4 5h16v14H4z"/><path d="M4 16l5-5 4 4 3-3 4 4"/><circle cx="15.5" cy="9" r="1.5"/>',
+    drive: '<path d="M3 7h6l2 2h10v10H3z"/>',
+    video: '<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9l5 3-5 3z"/>',
+    article: '<path d="M6 3h9l4 4v14H6z"/><path d="M9 11h7M9 15h7M9 7h4"/>',
+    link: '<path d="M10 14a4 4 0 0 0 6 0l3-3a4 4 0 0 0-6-6l-1 1"/><path d="M14 10a4 4 0 0 0-6 0l-3 3a4 4 0 0 0 6 6l1-1"/>'
+  };
+  function linkCard(x) {
+    const h = x.href;
+    const [kind, src] = /photos\.app\.goo\.gl|photos\.google/.test(h) ? ['album', 'Google Photos album']
+      : /drive\.google/.test(h) ? ['drive', 'Google Drive folder']
+      : /facebook\.com/.test(h) ? ['video', 'Facebook video']
+      : /thenationonlineng/.test(h) ? ['article', 'The Nation · Article']
+      : /linktr\.ee/.test(h) ? ['link', 'Linktree'] : ['link', 'External link'];
+    const label = x.label.replace(/^The Nation: |^Full album: | \((Facebook|Google Photos)\)$/g, '');
+    return `<a class="g-item linkcard lk-${kind}" href="${h}" target="_blank" rel="noopener">
+      <span class="lk-ico"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[kind]}</svg></span>
+      <span class="lk-src">${src}</span><strong>${label}</strong><span class="lk-go">Open <i>↗</i></span></a>`;
+  }
+
   // Modal
   const modal = $('#modal'), body = $('#modal-body');
   function openFolder(f) {
@@ -34,7 +55,7 @@
       : x.type === 'mp4' ? `<div class="g-item wide"><video src="${x.src}" poster="${x.poster}" controls preload="none" playsinline></video></div>`
       : x.type === 'pdf' ? `<a class="g-item cert" href="${x.src}" target="_blank" rel="noopener"><img loading="lazy" src="${x.thumb}" alt="${x.cap}"><span>${x.cap}</span></a>`
       : x.type === 'image' ? `<a class="g-item" href="${x.src}" target="_blank" rel="noopener"><img loading="lazy" src="${x.src}" alt="${x.cap}"><span class="cap">${x.cap}</span></a>`
-      : `<a class="g-item linkcard" href="${x.href}" target="_blank" rel="noopener">${x.label} ↗</a>`).join('');
+      : linkCard(x)).join('');
     body.querySelectorAll('.vid').forEach(v => v.addEventListener('click', () => {
       v.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${v.dataset.id}?autoplay=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen title="Video"></iframe>`;
     }));
