@@ -39,12 +39,12 @@ window.PORTFOLIO = {
     }
   ],
   experience: [
-    ['Sep 2026 – Present', 'Cinematographer & Video Editor', 'Royal Integrated Ventures Nigeria Limited', 'Plan, shoot and edit brand, promotional and corporate content; camera, lighting, directing and sound.'],
-    ['Jan 2026 – Present', 'Social Media Manager (Remote)', 'Cheser Media', 'Content ideas, publishing schedules, brand voice and performance-led planning on Facebook and Instagram.'],
-    ['Previous', 'Media Consultant', 'KSMedia', 'Story angles, research and editorial guidance for media projects.'],
-    ['Previous', 'HR / Administrative Support', 'Fatimah Abdulazeez & Co', 'Client intake, case management, court filings, billing support and vendor liaison.'],
-    ['Previous', 'Intern', 'The Nation', 'Field reporting, interviews, source verification and report preparation.'],
-    ['Previous', 'Industrial Training', 'UNILAG Communication Unit', 'Institutional media production and public information campaigns.']
+    ['Sep 2026 – Present', 'Cinematographer & Video Editor', 'Royal Integrated Ventures Nigeria Limited', 'Plan, shoot and edit brand, promotional and corporate content; camera, lighting, directing and sound.', ['Premiere Pro','Lighting','Directing','Sound','Brand video']],
+    ['Jan 2026 – Present', 'Social Media Manager (Remote)', 'Cheser Media', 'Content ideas, publishing schedules, brand voice and performance-led planning on Facebook and Instagram.', ['654K views / 30 days','Content calendar','Insights','Reels']],
+    ['Previous', 'Media Consultant', 'KSMedia', 'Story angles, research and editorial guidance for media projects.', ['Research','Story development','Editorial standards']],
+    ['Previous', 'HR / Administrative Support', 'Fatimah Abdulazeez & Co', 'Client intake, case management, court filings, billing support and vendor liaison.', ['Operations','Documentation','Vendor liaison']],
+    ['Previous', 'Intern', 'The Nation', 'Field reporting, interviews, source verification and report preparation.', ['Reporting','Interviews','Fact-checking']],
+    ['Previous', 'Industrial Training', 'UNILAG Communication Unit', 'Institutional media production and public information campaigns.', ['Media production','Internal comms']]
   ],
   tools: ['Adobe Premiere Pro', 'CapCut', 'Adobe Lightroom', 'Photoshop', 'VN', 'WordPress', 'Canva', 'Canon EOS RP', 'Drone', 'Google Workspace', 'Microsoft Office', 'Instagram', 'TikTok', 'YouTube', 'Facebook', 'LinkedIn']
 };

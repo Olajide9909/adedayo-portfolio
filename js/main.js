@@ -4,7 +4,7 @@
 
   // Smooth scrolling
   if (window.Lenis && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const lenis = new Lenis({ lerp: 0.09 });
+    const lenis = window.__lenis = new Lenis({ lerp: 0.09 });
     const raf = t => { lenis.raf(t); requestAnimationFrame(raf); }; requestAnimationFrame(raf);
     document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
       const id = a.getAttribute('href'); if (id.length > 1 && $(id)) { e.preventDefault(); lenis.scrollTo(id, { offset: -60 }); }
@@ -46,7 +46,24 @@
   addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
 
   // Timeline + tools
-  $('#timeline').innerHTML = D.experience.map(([d, r, o, t]) => `<li class="reveal"><time>${d}</time><h3>${r}</h3><p class="org">${o}</p><p>${t}</p></li>`).join('');
+  // Experience: tabs on one side, detail panel that flips in on the other
+  const tabs = $('#xp-tabs'), panel = $('#xp-panel');
+  tabs.innerHTML = D.experience.map(([d, r, o], i) =>
+    `<button role="tab" aria-selected="${i === 0}" data-i="${i}"><span>${String(i + 1).padStart(2, '0')}</span><b>${o}</b><small>${d}</small></button>`).join('');
+  function showXp(i) {
+    const [d, r, o, t, tags = []] = D.experience[i];
+    tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', b.dataset.i == i));
+    panel.innerHTML = `<p class="eyebrow">${d}</p><h3>${r}</h3><p class="org">${o}</p><p>${t}</p><div class="chips">${tags.map(x => `<span>${x}</span>`).join('')}</div><div class="xp-num">${String(i + 1).padStart(2, '0')}</div>`;
+    anime({ targets: panel, opacity: [0, 1], rotateY: [-14, 0], translateX: [30, 0], duration: 650, easing: 'easeOutExpo' });
+    anime({ targets: panel.querySelectorAll('.chips span'), opacity: [0, 1], translateY: [10, 0], delay: anime.stagger(50, { start: 150 }) });
+  }
+  tabs.addEventListener('click', e => { const b = e.target.closest('button'); if (b) showXp(+b.dataset.i); });
+  showXp(0);
+
+  // Back-to-top button
+  const top = $('#totop');
+  addEventListener('scroll', () => top.classList.toggle('show', scrollY > innerHeight * 0.8), { passive: true });
+  top.onclick = () => window.__lenis ? window.__lenis.scrollTo(0) : scrollTo({ top: 0, behavior: 'smooth' });
   const tl = D.tools.map(t => `<span>${t}</span>`).join(''); $('#tools').innerHTML = tl + tl;
 
   // Rotating role text
